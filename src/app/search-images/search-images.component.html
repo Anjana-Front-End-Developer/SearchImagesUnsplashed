@@ -1,0 +1,29 @@
+  <div class="row">
+    <div class="pull-right">
+      <mat-form-field class="form-field">
+        <mat-label>Search for images</mat-label>
+        <input matInput type="text" [(ngModel)]="getInfo" name="getInfo" (keyup)="searchImages(getInfo)">
+        <button mat-button *ngIf="getInfo" matSuffix mat-icon-button aria-label="Clear" (click)="getInfo=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" [routerLink]="['/favoritesimages']">Favorite list</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mT10">
+    <div class="col-4 repo" *ngFor="let image of response; let i=index;">
+      <div class="card">
+        <div class="card-block">
+          <img src='{{image.urls.small}}' class="rounded repo "
+            (mouseover)="onhover(image)" />
+          <div class="btnOverlay">
+            <button mat-raised-button color="primary" class="mB10" (click)="addToFavourites(image)" [disabled]="disableBtn">Add To Favourites</button>
+            <button mat-raised-button color="primary"  (click)="openauthorPage(image)">Author Page</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
